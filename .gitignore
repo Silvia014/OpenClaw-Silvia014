@@ -8,3 +8,23 @@
 credentials*
 secrets*
 config.local.*
+# Google OAuth / credentials
+.env
+.env.*
+*.json
+!openclaw-workspace-state.json
+
+google-calendar/token.json
+google-calendar/code_verifier.txt
+google-calendar/verifier.txt
+google-calendar/flow_state.pkl
+google-calendar/flow_save.json
+google-calendar/*token*
+google-calendar/*secret*
+
+# OAuth client secrets
+media/inbound/**/client_secret*.json
+
+# Python
+__pycache__/
+*.pyc
