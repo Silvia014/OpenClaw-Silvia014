@@ -1,61 +1,72 @@
 # SKILLS_DESIGN.md
 
-## Skill 1 — GitHub Daily Brief
+## Skill 1 — Smart Calendar Events
 
 ### 1. What does this skill do?
 
-The skill checks recent activity in my GitHub repositories and creates a short summary of relevant commits, issues, and pull requests. The summary is sent to me through Telegram.
+The skill converts natural-language scheduling requests into structured Google Calendar events. It automatically determines the event title, date, start time, duration, and timezone from the user's request and available context.
 
 ### 2. What input does the agent need?
 
-The agent needs to know which repositories to check and, when specified, the period of activity to analyze. If no period is provided, it should use recent activity.
+The user can describe an event naturally, for example:
 
-The agent gets my personal context, projects, and preferences from `USER.md`, and behavioral rules from `SOUL.md` and `AGENTS.md`.
+"Study Next.js on Thursday afternoon for two hours."
 
-GitHub information and Telegram delivery are handled through the available Zapier connections.
+The agent uses the user's timezone, preferences, calendar context, and information from `USER.md`, `SOUL.md`, `AGENTS.md`, and `TOOLS.md`.
+
+The existing Google Calendar connection is used to perform the calendar operation. The skill must not modify the existing Google Calendar authentication or connection.
 
 ### 3. What does a good output look like?
 
-A good output is a short, structured Telegram message containing:
+A successful output is a Google Calendar event containing:
 
-- relevant recent commits;
-- important open or updated issues;
-- relevant pull requests;
-- possible blockers or actions requiring attention.
+- a clear title;
+- the correct date;
+- the correct start time;
+- the requested duration;
+- the appropriate timezone.
 
-The most important actions should appear first.
+The skill should avoid creating duplicate or conflicting events when calendar information is available.
 
-The skill is successful when a relevant and up-to-date GitHub summary is delivered to Telegram.
+The user should receive a concise confirmation containing the event details and, when available, a link to the created event.
 
 ---
 
-## Skill 2 — Tasks to Calendar
+## Skill 2 — Meeting Notes to Google Docs
 
 ### 1. What does this skill do?
 
-The skill reviews pending Google Tasks and creates focused work blocks in Google Calendar for tasks that require dedicated time.
+The skill converts raw meeting notes into a structured and useful summary and saves the result as a Google Doc.
 
 ### 2. What input does the agent need?
 
-The agent needs access to pending tasks and, when available, their priority, deadline, estimated duration, and context.
+The user provides raw meeting notes in natural language.
 
-When the user provides additional constraints such as a specific date, available time, or duration, these should be used to determine when the task should be scheduled.
+The notes may contain:
 
-Personal context, projects, and preferences come from `USER.md`, while behavioral rules come from `SOUL.md` and `AGENTS.md`.
+- discussion points;
+- decisions;
+- tasks;
+- questions;
+- deadlines;
+- participants;
+- follow-up information.
 
-Google Tasks and Google Calendar are connected through Zapier.
+The agent uses the user's context and working preferences from `USER.md`, `SOUL.md`, `AGENTS.md`, and `TOOLS.md`.
+
+The existing Google Docs connection is used to create the document. The skill must not modify the existing Google Docs authentication or connection.
 
 ### 3. What does a good output look like?
 
-A good output consists of focused work blocks created in Google Calendar for the selected tasks.
+A successful output is a structured Google Doc containing:
 
-Each block should contain:
+- meeting title and date;
+- summary;
+- decisions;
+- action items;
+- open questions;
+- next steps.
 
-- a clear task title;
-- date and time;
-- an appropriate duration;
-- relevant context in the description when necessary.
+The document should be concise, organized, and easy to review later.
 
-The skill should avoid creating duplicate events and should respect existing calendar events.
-
-The skill is successful when the selected tasks are correctly represented as work blocks in Google Calendar.
+The user should receive confirmation that the document was created and, when available, a link to the document.
