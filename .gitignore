@@ -28,3 +28,4 @@ media/inbound/**/client_secret*.json
 # Python
 __pycache__/
 *.pyc
+.env
